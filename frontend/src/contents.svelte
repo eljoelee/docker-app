@@ -13,9 +13,10 @@
 
     const increaseCount = () => count++;
     
-    $: users = fetch('https://randomuser.me/api/?results=5')
+    // api : backend(fastapi)
+    $: res = fetch('/api/')
     .then(response => response.json())
-    .then(data => data.results)
+    .then(data => {console.log(data)})
 </script>
 
 <h1>Number</h1>
@@ -36,7 +37,7 @@
 <p>{ @html str }</p>
 
 
-{#await users}
+<!-- {#await users}
     <p>...Loading</p>
     {:then users}
         {#each users as user}
@@ -45,4 +46,4 @@
         {/each}
     {:catch error}
         <p>Error!</p>
-{/await}
+{/await} -->

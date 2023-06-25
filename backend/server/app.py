@@ -1,7 +1,8 @@
 from typing import Union
 from fastapi import FastAPI
 
-app = FastAPI()
+# root_path : Nginx Proxy URL
+app = FastAPI(root_path="/api")
 
 @app.get("/")
 def read_root():
