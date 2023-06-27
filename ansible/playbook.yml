@@ -1,5 +1,20 @@
-- name: deploy Docker Compose
-  community.docker.docker_compose:
-    project_src: /home/ubuntu/docker-app
-    files:
-    - docker-compose.yml
+---
+- hosts: docker
+  become: yes
+  tasks:
+    - name: Update apt packages
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+        cache_valid_time: 3600
+
+    - name: Clone a github repository
+      git:
+        repo: 'https://github.com/eljoelee/docker-app.git'
+        dest: /home/ubuntu
+
+    - name: Deploy docker compose
+      community.docker.docker_compose:
+        project_src: /home/ubuntu/docker-app
+        files:
+        - docker-compose.yml
