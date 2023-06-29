@@ -25,7 +25,9 @@ ansible-playbook playbook.yml -i /home/ubuntu/docker-app/ansible/hosts
 ---
 # EC2 - Server
 ```sh
-sudo apt update && sudo apt install -y python3-pip python3-docker
+sudo apt update && sudo apt install -y python3-pip
+
+sudo pip install docker-compose
 
 sudo apt-get update && sudo apt-get install -y ca-certificates curl gnupg
 
