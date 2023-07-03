@@ -4,11 +4,11 @@ git clone https://github.com/eljoelee/docker-app.git
 
 sudo apt update && sudo apt upgrade 
 
-sudo apt install software-properties-common
+sudo DEBIAN_FRONTEND=noninteractive apt install software-properties-common
 
 sudo apt-add-repository --yes --update ppa:ansible/ansible
 
-sudo apt install -y ansible
+sudo DEBIAN_FRONTEND=noninteractive apt install -yq ansible
 
 ssh-keygen -t rsa
 
@@ -25,11 +25,11 @@ ansible-playbook playbook.yml -i /home/ubuntu/docker-app/ansible/hosts
 ---
 # EC2 - Server
 ```sh
-sudo apt update && sudo apt install -y python3-pip
+sudo apt update && sudo DEBIAN_FRONTEND=noninteractive apt install -yq python3-pip
 
 sudo pip install docker-compose
 
-sudo apt-get update && sudo apt-get install -y ca-certificates curl gnupg
+sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq ca-certificates curl gnupg
 
 sudo install -m 0755 -d /etc/apt/keyrings
 
@@ -42,9 +42,7 @@ echo \
 "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
 sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt-get update
-
-sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # 위 베스천 서버에서 복사한 내용 붙여넣기
 vi ~/.ssh/authorized_keys
