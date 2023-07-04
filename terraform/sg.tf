@@ -4,9 +4,9 @@ module "bastion_sg" {
 
   name            = "bastion-sg"
   description     = "Security group for bastion"
-  vpc_id          = "${module.vpc.vpc_id}"
+  vpc_id          = module.vpc.vpc_id
   use_name_prefix = "false"
-  
+
   ingress_with_cidr_blocks = [
     {
       from_port   = 22
@@ -34,9 +34,19 @@ module "server_sg" {
 
   name            = "server-sg"
   description     = "Security group for server"
-  vpc_id          = "${module.vpc.vpc_id}"
+  vpc_id          = module.vpc.vpc_id
   use_name_prefix = "false"
-  
+
+  ingress_with_source_security_group_id = [
+    {
+      from_port                = 22
+      to_port                  = 22
+      protocol                 = "tcp"
+      description              = "ssh"
+      source_security_group_id = module.bastion_sg.security_group_id
+    }
+  ]
+
   ingress_with_cidr_blocks = [
     {
       from_port   = 3000
