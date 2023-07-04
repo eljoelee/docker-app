@@ -5,9 +5,9 @@
 3. Load > terraform_ec2_key.ppk > Conversions > Export OpenSSH Key > terraform_ec2_key.pem
 4. .pem & .pub > terraform 디렉토리 하위에 복사
 ---
-# EC2 - Bastion
+# 서버 작업
 ```sh
-# 서버 인스턴스 Private IP 삽입
+# Bastion 접속 후 hosts 파일에 서버 인스턴스 Private IP 삽입
 sudo vi /home/ubuntu/docker-app/ansible/hosts
 
 # ssh-key 생성
